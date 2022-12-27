@@ -11,7 +11,6 @@ import com.shopme.common.entity.CartItem;
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.Product;
 
-@Repository
 public interface ShopingCartRepository extends CrudRepository<CartItem, Integer> {
 
 	/*
