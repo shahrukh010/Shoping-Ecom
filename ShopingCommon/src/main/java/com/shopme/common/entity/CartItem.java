@@ -1,5 +1,6 @@
 package com.shopme.common.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,11 +24,11 @@ public class CartItem {
 	 * 
 	 * i.e ManyToOne
 	 */
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "product_id")
 	private Product product;
 
@@ -74,5 +75,4 @@ public class CartItem {
 				+ "]";
 	}
 
-	
 }
