@@ -28,9 +28,13 @@ public class ShopingCartRestController {
 		try {
 			Customer customer = getAuthenticatedCustomer(request);
 			Integer updateQuantity = cartService.addProduct(productId, quantity, customer);
+
 			return " you just added " + updateQuantity + "item to your cart";
 		} catch (CustomerNotFoundException ex) {
 			return "You must login to add product in to cart";
+		} catch (ShopingCartException ex) {
+
+			return "You can not add more then " + 5 + " items";
 		}
 
 	}
