@@ -60,12 +60,14 @@ public class ShopingCartRepo {
 	@Test
 	public void findByCustomerAndProduct() {
 
-		Customer customerId = entityManager.find(Customer.class, 2);
-		Product productId = entityManager.find(Product.class, 130);
+		Customer customerId = entityManager.find(Customer.class, 7);
+//		Product productId = entityManager.find(Product.class, 32);
+		Integer p = 32;
+		Product productId = new Product(p);
 
 		CartItem cartItem = this.cartRepo.findByCustomerAndProduct(customerId, productId);
 
-		System.err.println(cartItem);
+		System.err.println(productId);
 	}
 
 	@Test

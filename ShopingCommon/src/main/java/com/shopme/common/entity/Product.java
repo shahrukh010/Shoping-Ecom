@@ -62,7 +62,7 @@ public class Product {
 	
 	public Product() {}
 
-	public Product(Integer i) {
+	public Product(Integer id) {
 		this.id = id;
 	}
 

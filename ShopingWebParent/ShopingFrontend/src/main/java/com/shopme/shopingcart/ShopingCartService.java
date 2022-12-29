@@ -25,11 +25,12 @@ public class ShopingCartService {
 			updateQuantity = cartItem.getQuantity();
 		} else {
 
+			cartItem = new CartItem();
 			cartItem.setCustomer(customer);
 			cartItem.setProduct(product);
 		}
 		cartItem.setQuantity(updateQuantity);
-
+		cartRepo.save(cartItem);
 		return updateQuantity;
 	}
 
