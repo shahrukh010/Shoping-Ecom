@@ -38,7 +38,7 @@ public class ShopingCartController {
 		String CUSTOMER_EMAIL = Utility.getEmailOfAuthenticatedCustomer(request);
 
 		if (CUSTOMER_EMAIL == null)
-			throw new CustomerNotFoundException("Customer Not Found");
+			throw new CustomerNotFoundException("Customer Email Not Found");
 
 		return customerService.getCustomerByEmail(CUSTOMER_EMAIL);
 	}
