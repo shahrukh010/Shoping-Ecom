@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,33 +41,33 @@ public class BrandController {
 	@GetMapping("/brands/page/{pageNum}")
 	public String listByPage(@PathVariable("pageNum") Integer pageNum, Model model) {
 
-//		if (sortDir == null || sortDir.isEmpty())
-//			sortDir = "asc";
-//		else
-//			sortDir = "dsc";
+		// if (sortDir == null || sortDir.isEmpty())
+		// sortDir = "asc";
+		// else
+		// sortDir = "dsc";
 
 		System.out.println(pageNum);
 
 		Page page = service.listByPage(pageNum, null, null);
 		List<Brand> listBrands = page.getContent();
 
-//		System.out.println(sortField + "----");
+		// System.out.println(sortField + "----");
 
 		int startCount = (pageNum - 1) * service.BRAND_PER_PAGE + 1;
 		int endCount = (startCount) + service.BRAND_PER_PAGE - 1;
 
-//		String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+		// String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
 
 		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("startCount", startCount);
 		model.addAttribute("endCount", endCount);
 		model.addAttribute("totalItems", page.getTotalElements());
 		model.addAttribute("totalPages", page.getTotalPages());
-//		model.addAttribute("sortField", sortField);
-//		model.addAttribute("sortDir", sortDir);
-//		model.addAttribute("keyword", keyword);
-//		model.addAttribute("reverseSortDir", reverseSortDir);
-//		model.addAttribute("listCategories", listCategories);
+		// model.addAttribute("sortField", sortField);
+		// model.addAttribute("sortDir", sortDir);
+		// model.addAttribute("keyword", keyword);
+		// model.addAttribute("reverseSortDir", reverseSortDir);
+		// model.addAttribute("listCategories", listCategories);
 		model.addAttribute("listBrands", listBrands);
 		return "brands/brands";
 
@@ -135,8 +133,8 @@ public class BrandController {
 			service.save(brand);
 		}
 
-//		System.out.println(brand.getName()); debuging
-//		service.save(brand);
+		// System.out.println(brand.getName()); debuging
+		// service.save(brand);
 		redirectAttribute.addFlashAttribute("message", "The brand has been save successfully.");
 		return "redirect:/brands";
 	}
