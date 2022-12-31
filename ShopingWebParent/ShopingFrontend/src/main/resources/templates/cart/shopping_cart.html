@@ -28,18 +28,19 @@
 					<div>
 						<a th:href="@{'/p/' + ${product.alias}}" target="_blank"
 							th:title="${product.name}">
-							<b>[[${product.shortName}]]</b>
+							<b>[[${product.alias}]]</b>
 						</a>
 					</div>
 					<div th:replace="cart/quantity_control :: quantity_control(${item.quantity}, ${product.id})"></div>
 					
 					<div>
 						<span>X&nbsp;</span>
-						<div th:replace="product/product_fragment :: product_price"></div>
 					</div>
 					<div>
 						<span>=&nbsp;</span>
-						<span th:if="${CURRENCY_SYMBOL_POSITION == 'Before price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span><span th:id="'subtotal' + ${product.id}" class="h4 subtotal">[[${#numbers.formatDecimal(item.subtotal, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]</span><span th:if="${CURRENCY_SYMBOL_POSITION == 'After price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>						
+
+<!--						<span th:if="${CURRENCY_SYMBOL_POSITION == 'Before price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span><span th:id="'subtotal' + ${product.id}" class="h4 subtotal">[[${#numbers.formatDecimal(item.subtotal, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]</span><span th:if="${CURRENCY_SYMBOL_POSITION == 'After price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>						-->
+
 					</div>					
 				</div>
 			</div>
@@ -88,7 +89,7 @@
 	var csrfHeaderName = "[[${_csrf.headerName}]]";
 	var csrfValue = "[[${_csrf.token}]]";
 	
-//	decimalDigits = [[${DECIMAL_DIGITS}]];
+<!--	decimalDigits = [[${DECIMAL_DIGITS}]];-->
 	decimalPointType = "[[${DECIMAL_POINT_TYPE}]]";
 	thousandsPointType = "[[${THOUSANDS_POINT_TYPE}]]";
 	

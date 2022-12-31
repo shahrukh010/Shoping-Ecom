@@ -21,6 +21,13 @@ public class ShopingCartRestController {
 	@Autowired
 	private CustomerService customerService;
 
+	/*
+	 *here you can see addProduct end point is inside RestController 
+	 *because of without reload page user can add/remove his product
+	 *so based on situation we can decide where we have to use RestController or Controller
+	 * 
+	 * 
+	 */
 	@PostMapping("/cart/add/{productId}/{quantity}")
 	public String addProductToCart(@PathVariable(name = "productId") Integer productId,
 			@PathVariable(name = "quantity") Integer quantity, HttpServletRequest request) {
