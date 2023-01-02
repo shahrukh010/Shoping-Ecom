@@ -1,5 +1,7 @@
 package com.shopme.common.entity;
 
+import java.beans.Transient;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -72,6 +74,12 @@ public class CartItem {
 	public String toString() {
 		return "CartItem [id=" + id + ", customer=" + customer + ", product=" + product + ", quantity=" + quantity
 				+ "]";
+	}
+	
+	@Transient
+	public float getSubtotal() {
+		
+		return product.getDiscountPrice() * quantity;
 	}
 
 }
