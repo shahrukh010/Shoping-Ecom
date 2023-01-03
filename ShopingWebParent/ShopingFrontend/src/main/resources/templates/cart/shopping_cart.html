@@ -30,7 +30,7 @@
 						<div class="col-6">
 							<div>
 								<a th:href="@{'/p/' + ${product.alias}}" target="_blank" th:title="${product.name}">
-									<b>[[${product.alias}]]</b>
+									<b>[[${product.name}]]</b>
 								</a>
 							</div>
 							<div
@@ -39,14 +39,17 @@
 
 							<div>
 								<span>X&nbsp;</span>
+								<div th:replace="product/product_fragment :: product_price"></div>
 							</div>
 							<div>
 								<span>=&nbsp;</span>
-
 								<span th:if="${CURRENCY_SYMBOL_POSITION == 'Before price'}"
-									th:remove="tag">[[${#numbers.formatDecimal(item.subtotal, 1, THOUSANDS_POINT_TYPE,
-									DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]</span>>
-
+									th:remove="tag">[[${CURRENCY_SYMBOL}]]</span><span
+									th:id="'subtotal' + ${product.id}"
+									class="h4 subtotal">[[${#numbers.formatDecimal(item.subtotal, 1,
+									THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]</span><span
+									th:if="${CURRENCY_SYMBOL_POSITION == 'After price'}"
+									th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>
 							</div>
 						</div>
 					</div>
@@ -99,7 +102,7 @@
 		var csrfHeaderName = "[[${_csrf.headerName}]]";
 		var csrfValue = "[[${_csrf.token}]]";
 
-		<!--	decimalDigits = [[${DECIMAL_DIGITS}]];-->
+		decimalDigits = [[${DECIMAL_DIGITS}]];
 		decimalPointType = "[[${DECIMAL_POINT_TYPE}]]";
 		thousandsPointType = "[[${THOUSANDS_POINT_TYPE}]]";
 
