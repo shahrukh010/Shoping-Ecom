@@ -28,8 +28,15 @@ public class ShopingCartController {
 
 		Customer customer = getAuthenticatedCustomer(request);
 		List<CartItem> cartItems = shopingCartService.listCartItems(customer);
+		
+		float estimatedTotal = 0.0f;
+		
+		for(CartItem cartItem: cartItems) {
+			estimatedTotal +=cartItem.getSubtotal();
+		}
 
 		model.addAttribute("cartItems", cartItems);
+		model.addAttribute("estimatedTotal",estimatedTotal);
 		return "cart/shopping_cart";
 	}
 

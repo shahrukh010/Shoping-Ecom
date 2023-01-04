@@ -39,7 +39,7 @@
 
 							<div>
 								<span>X&nbsp;</span>
-								<div th:replace="product/product_fragment :: product_price"></div>
+								<div th:replace="product_fragment :: product_price"></div>
 							</div>
 							<div>
 								<span>=&nbsp;</span>
@@ -102,7 +102,7 @@
 		var csrfHeaderName = "[[${_csrf.headerName}]]";
 		var csrfValue = "[[${_csrf.token}]]";
 
-		decimalDigits = [[${DECIMAL_DIGITS}]];
+//		decimalDigits = [[${DECIMAL_DIGITS}]];
 		decimalPointType = "[[${DECIMAL_POINT_TYPE}]]";
 		thousandsPointType = "[[${THOUSANDS_POINT_TYPE}]]";
 
