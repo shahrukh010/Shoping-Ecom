@@ -15,7 +15,7 @@ public class ShopingCartService {
 	@Autowired
 	private ShopingCartRepository cartRepo;
 
-	public Integer addProduct(Integer productId, Integer quantity, Customer customer)throws ShopingCartException {
+	public Integer addProduct(Integer productId, Integer quantity, Customer customer) throws ShopingCartException {
 
 		Integer updateQuantity = quantity;
 
@@ -24,9 +24,9 @@ public class ShopingCartService {
 		CartItem cartItem = cartRepo.findByCustomerAndProduct(customer, product);
 		if (cartItem != null) {
 
-			if(updateQuantity > 5) {
-				
-				throw new ShopingCartException("you can not add more then "+5+" items");
+			if (updateQuantity > 5) {
+
+				throw new ShopingCartException("you can not add more then " + 5 + " items");
 			}
 			updateQuantity = cartItem.getQuantity();
 		} else {
@@ -40,9 +40,13 @@ public class ShopingCartService {
 		return updateQuantity;
 	}
 
-	
-	public List<CartItem>listCartItems(Customer customer){
-		
+	public List<CartItem> listCartItems(Customer customer) {
+
 		return cartRepo.findByCustomer(customer);
+	}
+
+	public float updateQuantity(Integer productId, Integer quantity, Customer customer) {
+
+		return 0.0f;
 	}
 }
