@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.shopme.category.ProductRepository;
 import com.shopme.common.entity.CartItem;
@@ -11,6 +12,8 @@ import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.Product;
 
 @Service
+@Transactional // this annotation use when we are working on delete/update query on repository
+				// layer to avoid TransactionException
 public class ShopingCartService {
 
 	@Autowired
@@ -56,5 +59,10 @@ public class ShopingCartService {
 		Product product = productRepo.findById(productId).get();
 		float subtotal = product.getDiscountPrice() * quantity;
 		return subtotal;
+	}
+
+	public void removeProduct(Integer productId, Customer customer) {
+
+		cartRepo.deleteByCustomerAndProduct(customer.getId(), productId);
 	}
 }

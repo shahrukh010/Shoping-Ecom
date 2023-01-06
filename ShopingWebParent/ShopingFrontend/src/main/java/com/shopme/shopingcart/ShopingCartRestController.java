@@ -3,6 +3,7 @@ package com.shopme.shopingcart;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,9 +23,9 @@ public class ShopingCartRestController {
 	private CustomerService customerService;
 
 	/*
-	 *here you can see addProduct end point is inside RestController 
-	 *because of without reload page user can add/remove his product
-	 *so based on situation we can decide where we have to use RestController or Controller
+	 * here you can see addProduct end point is inside RestController because of
+	 * without reload page user can add/remove his product so based on situation we
+	 * can decide where we have to use RestController or Controller
 	 * 
 	 * 
 	 */
@@ -44,6 +45,20 @@ public class ShopingCartRestController {
 			return "You can not add more then " + 5 + " items";
 		}
 
+	}
+
+	@DeleteMapping("/cart/remove/{productId}")
+	public String removeProduct(@PathVariable(name = "productId") Integer productId, HttpServletRequest request) {
+
+		try {
+
+			Customer customer = getAuthenticatedCustomer(request);
+			cartService.removeProduct(productId, customer);
+			return "The product has been removed from shoping cart";
+		} catch (CustomerNotFoundException ex) {
+
+			return "You must login to remove product";
+		}
 	}
 
 	private Customer getAuthenticatedCustomer(HttpServletRequest request) throws CustomerNotFoundException {

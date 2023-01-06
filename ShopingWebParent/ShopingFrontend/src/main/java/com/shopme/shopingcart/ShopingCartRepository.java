@@ -34,7 +34,11 @@ public interface ShopingCartRepository extends CrudRepository<CartItem, Integer>
 	 * all these are position of argument which is present in updateQuantity
 	 */
 	@Modifying
-	@Transactional
+	/*
+	 * @Transactional//better to use in service layer (for avoiding write multiple
+	 * times on each delete/update this annotation because of it is class level or
+	 * method level also to avoid TransactionException
+	 */
 	@Query("UPDATE CartItem c SET c.quantity = ?1 WHERE c.customer.id=?2 AND c.product.id=?3")
 	public void updateQuantity(Integer quantity, Integer customerId, Integer productId);
 
