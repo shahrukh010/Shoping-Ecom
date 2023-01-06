@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shopme.category.ProductRepository;
 import com.shopme.common.entity.CartItem;
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.Product;
@@ -14,6 +15,9 @@ public class ShopingCartService {
 
 	@Autowired
 	private ShopingCartRepository cartRepo;
+
+	@Autowired
+	private ProductRepository productRepo;
 
 	public Integer addProduct(Integer productId, Integer quantity, Customer customer) throws ShopingCartException {
 
@@ -47,6 +51,10 @@ public class ShopingCartService {
 
 	public float updateQuantity(Integer productId, Integer quantity, Customer customer) {
 
-		return 0.0f;
+		cartRepo.updateQuantity(quantity, customer.getId(), productId);
+
+		Product product = productRepo.findById(productId).get();
+		float subtotal = product.getDiscountPrice() * quantity;
+		return subtotal;
 	}
 }

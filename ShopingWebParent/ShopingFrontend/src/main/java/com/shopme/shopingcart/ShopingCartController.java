@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.shopme.Utility;
 import com.shopme.common.entity.CartItem;
@@ -28,15 +30,15 @@ public class ShopingCartController {
 
 		Customer customer = getAuthenticatedCustomer(request);
 		List<CartItem> cartItems = shopingCartService.listCartItems(customer);
-		
+
 		float estimatedTotal = 0.0f;
-		
-		for(CartItem cartItem: cartItems) {
-			estimatedTotal +=cartItem.getSubtotal();
+
+		for (CartItem cartItem : cartItems) {
+			estimatedTotal += cartItem.getSubtotal();
 		}
 
 		model.addAttribute("cartItems", cartItems);
-		model.addAttribute("estimatedTotal",estimatedTotal);
+		model.addAttribute("estimatedTotal", estimatedTotal);
 		return "cart/shopping_cart";
 	}
 
@@ -48,5 +50,20 @@ public class ShopingCartController {
 			throw new CustomerNotFoundException("Customer Email Not Found");
 
 		return customerService.getCustomerByEmail(CUSTOMER_EMAIL);
+	}
+
+	@PostMapping("/cart/update/{productId}/{quantity}")
+	public String updateQuantity(@PathVariable(name = "quantity") Integer quantity,
+			@PathVariable(name = "productId") Integer productId, HttpServletRequest request) {
+
+		try {
+			Customer customer = getAuthenticatedCustomer(request);
+		System.out.println(productId+" "+quantity+" "+customer.getId());
+			float subtotal = shopingCartService.updateQuantity(productId, quantity, customer);
+			return String.valueOf(subtotal);
+		} catch (CustomerNotFoundException ex) {
+			return "You must login to update product";
+
+		}
 	}
 }
