@@ -43,13 +43,15 @@
 					<span>Brand:[[${product.brand.name}]]</span>
 				</div>
 				<div>
-					List Price: <span th:if="${product.discountPrice <=0}">$[[${product.price}]]</span>
+					List Price: 
+					<span th:if="${product.discountPrice <=0}">$[[${product.price}]]</span>
 					<del th:if="${product.discountPrice > 0}">
 						<span>$[[${product.price}]]</span>
 					</del>
 				</div>
 				<div th:if="${product.discountPrice > 0}">
-					Price: <span style="font-size: larger; color: darkred">$[[${product.discountPrice}]]</span>
+					Price:
+					 <span style="font-size: larger; color: darkred">$[[${product.discountPrice}]]</span>
 					([[${product.discountPrice}]] % off)
 				</div>
 				<div>&nbsp;</div>
