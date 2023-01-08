@@ -45,8 +45,8 @@ public class Product {
 	private float cost;
 	private float price;
 
-	@Column(name = "discount_price")
-	private float discountPrice;
+	@Column(name="discount_percent")
+	private float discountPercent;
 
 	private float length;
 	private float width;
@@ -193,19 +193,25 @@ public class Product {
 	public void setPrice(float price) {
 		this.price = price;
 	}
+	
+	
+	public float getDiscountPercent() {
+		return discountPercent;
+	}
+
+	public void setDiscountPercent(float discountPercent) {
+		this.discountPercent = discountPercent;
+	}
 
 	@Transient
 	public float getDiscountPrice() {
 
-		if (discountPrice > 0)
-			return price * (100 - discountPrice / 100);
+		if (discountPercent > 0)
+			return price * ((100 - discountPercent) / 100);
 		return this.price;
 
 	}
 
-	public void setDiscountPrice(float discountPrice) {
-		this.discountPrice = discountPrice;
-	}
 
 	public float getLength() {
 		return length;
