@@ -22,7 +22,7 @@ public class ShippingRateController {
 	}
 
 	@GetMapping("/shipping_rates/page/{pageNum}")
-	public String listByPagele(
+	public String listByPage(
 			@PagingAndSortingParam(listName = "shipingRates", moduleURL = "/shipping_rates") PagingAndSortingHelper helper,
 			@PathVariable(name = "pageNum") int pageNum) {
 
