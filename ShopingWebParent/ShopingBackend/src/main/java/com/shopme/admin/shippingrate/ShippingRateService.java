@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shopme.admin.paginig.PagingAndSortingHelper;
 import com.shopme.admin.setting.country.CountryRepository;
 import com.shopme.common.entity.Country;
 import com.shopme.common.entity.ShippingRate;
@@ -17,6 +18,11 @@ public class ShippingRateService {
 
 	@Autowired
 	private ShippingRateRepository shippingRepo;
+
+	public void listByPage(int pageNum, PagingAndSortingHelper helper) {
+
+		helper.listEntites(pageNum, RATE_PER_PAGE, shippingRepo);
+	}
 
 	@Autowired
 	private CountryRepository countryRepo;

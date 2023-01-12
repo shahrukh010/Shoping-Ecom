@@ -7,10 +7,11 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.shopme.admin.paginig.SearchRepository;
 import com.shopme.common.entity.ShippingRate;
 
 @Repository
-public interface ShippingRateRepository extends JpaRepository<ShippingRate, Integer> {
+public interface ShippingRateRepository extends SearchRepository<ShippingRate, Integer> {
 
 	@Query("SELECT shippingRate FROM ShippingRate shippingRate WHERE shippingRate.country.id=?1 AND shippingRate.state = ?2")
 	public ShippingRate findByCountryAndState(Integer countryId, String state);
