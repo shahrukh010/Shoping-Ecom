@@ -27,6 +27,7 @@ public class ShippingRateController {
 			@PathVariable(name = "pageNum") int pageNum) {
 
 		service.listByPage(pageNum, helper);
+
 		return "shipping_rates/shipping_rates";
 	}
 }
