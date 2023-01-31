@@ -52,6 +52,7 @@ public class Address {
 	@Column(name = "default_address")
 	private boolean defaultForShipping;
 
+
 	public Integer getId() {
 		return id;
 	}
@@ -140,7 +141,7 @@ public class Address {
 		this.country = country;
 	}
 
-	public boolean isDefaultForShipping() {
+	public boolean getDefaultForShipping() {
 		return defaultForShipping;
 	}
 
