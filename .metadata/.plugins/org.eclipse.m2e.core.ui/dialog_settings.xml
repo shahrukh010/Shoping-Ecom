@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="/home/linuxlite/project/Shoping-Ecom"/>
 			<item value="/home/campx/Desktop/project/Shoping-Ecom"/>
 			<item value="/home/hector/Downloads/SpringbootWorkspace/springsecurity-code-doc"/>
 			<item value="/home/hector/ShopmeProject"/>

@@ -39,24 +39,6 @@ public class AddressController {
 		return "address_book/addresses";
 	}
 
-//	@GetMapping("address_book")
-//	public ResponseEntity<Map<String, Object>> showAddressBook(HttpServletRequest httpRequest)
-//			throws CustomerNotFoundException {
-//
-//		Customer customer = getAuthenticatedCustomer(httpRequest);
-//		List<Address> listAddresses = addressService.listAddressBook(customer);
-//
-//		Map<String, Object> response = new HashMap<>();
-//
-//		for (Map.Entry<String, Object> res : response.entrySet()) {
-//
-//			System.out.println(res.getKey() + "------>" + res.getValue());
-//		}
-////		response.put("customer", customer);
-//
-//		return new ResponseEntity<>(response, HttpStatus.OK);
-//	}
-
 	private Customer getAuthenticatedCustomer(HttpServletRequest request) throws CustomerNotFoundException {
 
 		String CUSTOMER_EMAIL = Utility.getEmailOfAuthenticatedCustomer(request);
