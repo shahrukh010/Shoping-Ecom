@@ -24,7 +24,7 @@ public class Address {
 	private String lastName;
 
 	@Column(name = "phone_number", nullable = false, length = 12)
-	private long phoneNumber;
+	private Long phoneNumber;
 
 	@Column(name = "address_line1", nullable = false, length = 64)
 	private String address1;
@@ -39,7 +39,7 @@ public class Address {
 	private String state;
 
 	@Column(nullable = false)
-	private int zipCode;
+	private Integer zipCode;
 
 	@ManyToOne()
 	@JoinColumn(name = "customer_id")
@@ -51,7 +51,6 @@ public class Address {
 
 	@Column(name = "default_address")
 	private boolean defaultForShipping;
-
 
 	public Integer getId() {
 		return id;
@@ -77,11 +76,11 @@ public class Address {
 		this.lastName = lastName;
 	}
 
-	public long getPhoneNumber() {
+	public Long getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(long phoneNumber) {
+	public void setPhoneNumber(Long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
@@ -117,11 +116,11 @@ public class Address {
 		this.state = state;
 	}
 
-	public int getZipCode() {
+	public Integer getZipCode() {
 		return zipCode;
 	}
 
-	public void setZipCode(int zipCode) {
+	public void setZipCode(Integer zipCode) {
 		this.zipCode = zipCode;
 	}
 
@@ -151,10 +150,40 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber="
-				+ phoneNumber + ", address1=" + address1 + ", address2=" + address2 + ", city=" + city + ", state="
-				+ state + ", zipCode=" + zipCode + ",country=" + country.getName() + ", defaultForShipping="
-				+ defaultForShipping + "]";
+		String address = firstName;
+
+		if (lastName != null && !lastName.isBlank()) {
+			address += " " + lastName;
+		}
+
+		if (address1 != null && !address1.isEmpty()) {
+			address += "," + address1;
+		}
+
+		if (address2 != null && !address2.isEmpty()) {
+			address += "," + address2;
+		}
+
+		if (city != null && !city.isEmpty()) {
+			address += "," + city;
+		}
+
+		if (state != null && !state.isEmpty()) {
+			address += "," + getState();
+		}
+
+		address += "," + getCountry().getName();
+
+		if (zipCode != null) {
+			address += ", pincode " + getZipCode();
+		}
+
+		if (phoneNumber != null) {
+			address += ", phone " + getPhoneNumber();
+		}
+
+		return address;
+
 	}
 
 }

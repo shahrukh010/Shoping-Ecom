@@ -35,11 +35,11 @@ public class AddressRepositoryTest {
 		address.setFirstName("Shahrukh");
 		address.setLastName("khan");
 		address.setPhoneNumber(9097620737l);
-		address.setAddress1("Bihar");
-		address.setAddress2("Nainaghat,Darbhanga,Bihary");
-		address.setCity("DBG");
-		address.setState("Bihar");
-		address.setZipCode(847239);
+		address.setAddress1("Hyderabad");
+		address.setAddress2("Ghausiya Cafe,Hitex,Hyderabad");
+		address.setCity("Hitex");
+		address.setState("Telangana");
+		address.setZipCode(50018);
 
 		Address saveAdd = repo.save(address);
 		assertThat(saveAdd).isNotNull();

@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "customers")
@@ -59,12 +60,10 @@ public class Customer {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "authentication_type", length = 10)
 	private AuthenticationType authenticationType;
-	
-	
 
 	public Customer() {
 	}
-	
+
 	public Customer(Integer id) {
 		this.id = id;
 	}
@@ -199,11 +198,13 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", email=" + email + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", addressLine1=" + addressLine1
-				+ ", addressLine2=" + addressLine2 + ", state=" + state + ", postalCode=" + postalCode
-				+ ", verificationCode=" + verificationCode + ", enabled=" + enabled + ", createdTime=" + createdTime
-				+ ", country=" + country + "]";
+//		return "Customer [id=" + id + ", email=" + email + ", password=" + password + ", firstName=" + firstName
+//				+ ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", addressLine1=" + addressLine1
+//				+ ", addressLine2=" + addressLine2 + ", state=" + state + ", postalCode=" + postalCode
+//				+ ", verificationCode=" + verificationCode + ", enabled=" + enabled + ", createdTime=" + createdTime
+//				+ ", country=" + country + "]";
+
+		return getAddress();
 	}
 
 	public String getFullName() {
@@ -211,4 +212,41 @@ public class Customer {
 		return firstName + " " + lastName;
 	}
 
+	@Transient
+	public String getAddress() {
+
+		String address = firstName;
+
+		if (lastName != null && !lastName.isBlank()) {
+			address += " " + lastName;
+		}
+
+		if (addressLine1 != null && !addressLine1.isEmpty()) {
+			address += "," + addressLine1;
+		}
+
+		if (addressLine2 != null && !addressLine2.isEmpty()) {
+			address += "," + addressLine2;
+		}
+
+		if (city != null && !city.isEmpty()) {
+			address += "," + city;
+		}
+
+		if (state != null && !state.isEmpty()) {
+			address += "," + getState();
+		}
+
+		address += "," + getCountry().getName();
+
+		if (postalCode != null && !postalCode.isEmpty()) {
+			address += ", pincode " + getPostalCode();
+		}
+
+		if (phoneNumber != null && !phoneNumber.isEmpty()) {
+			address += ", phone " + getPhoneNumber();
+		}
+
+		return address;
+	}
 }

@@ -1,18 +1,11 @@
 package com.shopme.address;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import com.shopme.Utility;
 import com.shopme.common.entity.Address;
 import com.shopme.common.entity.Customer;
@@ -43,7 +36,8 @@ public class AddressController {
 				break;
 			}
 		}
-		model.addAttribute("listAddress", listAddreses);
+		System.out.println(listAddreses+"---");
+		model.addAttribute("listAddresses", listAddreses);
 		model.addAttribute("customer", customer);
 		model.addAttribute("usePrimaryAddressAsDefault", usePrimaryAddressAsDefault);
 		return "address_book/addresses";
