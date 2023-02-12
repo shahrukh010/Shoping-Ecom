@@ -27,15 +27,25 @@ public class AddressController {
 	@Autowired
 	private CustomerService customerService;
 
+	private boolean usePrimaryAddressAsDefault = true;
+
 	@GetMapping("address_book")
 	public String showAddressBook(Model model, HttpServletRequest httpRequest) throws CustomerNotFoundException {
 
 		Customer customer = getAuthenticatedCustomer(httpRequest);
 
 		List<Address> listAddreses = addressService.listAddressBook(customer);
+
+		for (Address address : listAddreses) {
+
+			if (address.getDefaultForShipping()) {
+				usePrimaryAddressAsDefault = false;
+				break;
+			}
+		}
 		model.addAttribute("listAddress", listAddreses);
 		model.addAttribute("customer", customer);
-
+		model.addAttribute("usePrimaryAddressAsDefault", usePrimaryAddressAsDefault);
 		return "address_book/addresses";
 	}
 
