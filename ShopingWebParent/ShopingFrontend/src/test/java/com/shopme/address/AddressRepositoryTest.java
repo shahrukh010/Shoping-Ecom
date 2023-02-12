@@ -84,4 +84,18 @@ public class AddressRepositoryTest {
 		Address updateAddress = this.repo.save(address);
 		assertThat(updateAddress.getPhoneNumber()).isEqualTo(phoneNo);
 	}
+
+	@Test
+	public void setDefaultAddress() {
+
+		Integer id = 3;
+		repo.setDefaultAddress(id);
+	}
+
+	@Test
+	public void setNonDefaultForOther() {
+
+		Integer id = 2;
+		repo.setNonDefaultForOther(id, id);
+	}
 }
