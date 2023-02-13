@@ -34,7 +34,7 @@ public class Customer {
 	private String lastName;
 
 	@Column(nullable = false, length = 12)
-	private String phoneNumber;
+	private Long phoneNumber;
 
 	@Column(nullable = false, length = 64)
 	private String addressLine1;
@@ -46,7 +46,7 @@ public class Customer {
 	private String city;
 
 	@Column(nullable = false, length = 64)
-	private String postalCode;
+	private Integer postalCode;
 
 	@Column(nullable = true, length = 64)
 	private String verificationCode;
@@ -116,11 +116,11 @@ public class Customer {
 		this.lastName = lastName;
 	}
 
-	public String getPhoneNumber() {
+	public Long getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
+	public void setPhoneNumber(Long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
@@ -172,11 +172,11 @@ public class Customer {
 		this.city = city;
 	}
 
-	public String getPostalCode() {
+	public Integer getPostalCode() {
 		return postalCode;
 	}
 
-	public void setPostalCode(String postalCode) {
+	public void setPostalCode(Integer postalCode) {
 		this.postalCode = postalCode;
 	}
 
@@ -239,11 +239,11 @@ public class Customer {
 
 		address += "," + getCountry().getName();
 
-		if (postalCode != null && !postalCode.isEmpty()) {
+		if (postalCode != null) {
 			address += ", pincode " + getPostalCode();
 		}
 
-		if (phoneNumber != null && !phoneNumber.isEmpty()) {
+		if (phoneNumber != null) {
 			address += ", phone " + getPhoneNumber();
 		}
 
