@@ -114,12 +114,12 @@ public class CustomerService {
 		customer.setPassword("");
 		customer.setVerificationCode("");
 		customer.setState("");
-		customer.setPhoneNumber("");
+		customer.setPhoneNumber(9999999l);
 		customer.setAddressLine1("");
 		customer.setAddressLine2("");
 		customer.setCity("");
-		customer.setPostalCode("");
-		
+		customer.setPostalCode(500018);
+
 		customerRepository.save(customer);
 	}
 }

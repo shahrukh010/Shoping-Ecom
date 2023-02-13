@@ -67,7 +67,7 @@ public class Order {
 	@Enumerated(EnumType.STRING)
 	private OrderStatus status;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
 
@@ -250,4 +250,16 @@ public class Order {
 		this.orderDetails = orderDetails;
 	}
 
+	public void copyAddressFromCustomer() {
+
+		setFirstName(customer.getFirstName());
+		setLastName(customer.getLastName());
+		setAddress1(customer.getAddressLine1());
+		setAddress2(customer.getAddressLine2());
+		setPhoneNumber(customer.getPhoneNumber());
+		setCity(customer.getCity());
+		setCountry(customer.getCountry().getName());
+		setState(customer.getState());
+		setPostalCode(customer.getPostalCode());
+	}
 }
