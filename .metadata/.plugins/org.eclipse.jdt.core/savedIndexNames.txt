@@ -44,7 +44,6 @@ INDEX VERSION 1.131+/home/linuxlite/project/Shoping-Ecom/.metadata/.plugins/org.
 1177373864.index
 3781498026.index
 4045681350.index
-3560379753.index
 2234184400.index
 3905656062.index
 2908601681.index

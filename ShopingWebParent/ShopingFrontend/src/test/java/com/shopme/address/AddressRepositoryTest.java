@@ -89,7 +89,7 @@ public class AddressRepositoryTest {
 	public void setDefaultAddress() {
 
 		Integer id = 3;
-		repo.setDefaultAddress(id);
+		repo.setDefaultAddress(id, 3);
 	}
 
 	@Test

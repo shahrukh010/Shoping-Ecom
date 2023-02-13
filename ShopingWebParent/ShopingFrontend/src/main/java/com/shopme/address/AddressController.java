@@ -107,7 +107,14 @@ public class AddressController {
 		redirect.addFlashAttribute("message", "Address is deleted.");
 		return "redirect:/address_book";
 	}
-	
-	
 
+	@GetMapping("address_book/default/{id}")
+	public String setDefaultAddress(@PathVariable("id") Integer defaultAddressId, HttpServletRequest request)
+			throws CustomerNotFoundException {
+
+		Customer customer = getAuthenticatedCustomer(request);
+
+		addressService.setDefaultAddress(defaultAddressId, customer.getId());
+		return "redirect:/address_book";
+	}
 }

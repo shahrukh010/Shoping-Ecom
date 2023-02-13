@@ -46,4 +46,10 @@ public class AddressService {
 
 		addressRepo.deleteByIdCustomer(addressId, customerId);
 	}
+
+	public void setDefaultAddress(Integer defaultAddressId, Integer customerId) {
+
+		addressRepo.setDefaultAddress(defaultAddressId, customerId);
+		addressRepo.setNonDefaultForOther(defaultAddressId, customerId);
+	}
 }
