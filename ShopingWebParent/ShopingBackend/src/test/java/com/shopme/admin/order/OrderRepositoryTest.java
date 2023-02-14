@@ -126,4 +126,24 @@ public class OrderRepositoryTest {
 
 		assertThat(saveOrder.getId()).isGreaterThan(0);
 	}
+
+	@Test
+	public void testListOrder() {
+
+		Iterable<Order> listOrder = orderRepo.findAll();
+
+		listOrder.forEach(System.out::println);
+	}
+
+	@Test
+	public void testUpdateOrder() {
+
+		Integer orderId = 8;
+
+		Order order = orderRepo.findById(orderId).get();
+		order.setStatus(OrderStatus.DELIVERD);
+		order.setPaymentMethod(PaymentMethod.CODE);
+		orderRepo.save(order);
+	}
+
 }

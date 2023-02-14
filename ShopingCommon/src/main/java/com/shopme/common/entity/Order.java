@@ -262,4 +262,11 @@ public class Order {
 		setState(customer.getState());
 		setPostalCode(customer.getPostalCode());
 	}
+
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", deliverDate=" + deliverDate + ", paymentMethod=" + paymentMethod + ", status="
+				+ status + ", customer=" + customer.getFullName() + "]";
+	}
+
 }
