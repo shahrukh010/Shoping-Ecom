@@ -146,4 +146,8 @@ public class OrderRepositoryTest {
 		orderRepo.save(order);
 	}
 
+	public void testDeleteOrder() {
+
+	}
+
 }
