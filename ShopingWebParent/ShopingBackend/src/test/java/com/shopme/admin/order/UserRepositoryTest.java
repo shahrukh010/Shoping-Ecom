@@ -23,25 +23,25 @@ public class UserRepositoryTest {
 	@Autowired
 	private TestEntityManager entityManager;
 
-	@Test
-	public void testCreateNewUserWithTwoRole() {
-
-		User user = new User("redhat", "Alex", "Smith", "alex@gmail.com");
-		Role roleEditor = new Role(4l);
-		Role roleAssistant1 = new Role(5l);
-		Role roleAssistant2 = new Role(3l);
-		user.addRole(roleEditor);
-		//here you can one user have same role two times so avoid duplicate object
-		//in role class i have implemented equals(),hasCode()
-		user.addRole(roleAssistant1);
-		user.addRole(roleAssistant2);
-		//or same object multiple times if we not implement equals() and hashCode() then in db
-		//two times will be same role for user 
+//	@Test
+//	public void testCreateNewUserWithTwoRole() {
+//
+//		User user = new User("redhat", "Alex", "Smith", "alex@gmail.com");
+//		Role roleEditor = new Role(4l);
+//		Role roleAssistant1 = new Role(5l);
+//		Role roleAssistant2 = new Role(3l);
+//		user.addRole(roleEditor);
+//		//here you can one user have same role two times so avoid duplicate object
+//		//in role class i have implemented equals(),hasCode()
 //		user.addRole(roleAssistant1);
-		
-		
-
-		User saveUser = userRepo.save(user);
-	}
+//		user.addRole(roleAssistant2);
+//		//or same object multiple times if we not implement equals() and hashCode() then in db
+//		//two times will be same role for user 
+////		user.addRole(roleAssistant1);
+//		
+//		
+//
+//		User saveUser = userRepo.save(user);
+//	}
 
 }

@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
+<head>
+	<style>
+		.navbar-nav .active > .nav-link {
+			background-color: #007bff;
+			color: #fff;
+		}
+	</style>
+</head>
+
 <body>
 	<div th:fragment="header_menu">
 		<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
@@ -119,6 +128,14 @@
 			<p>[[${COPYRIGHT}]]</p>
 		</div>
 	</div>
+	
+	<script>
+		// Add active class to the current page link in the navigation bar
+		$(document).ready(function () {
+			var currentLocation = window.location.pathname;
+			$('a.nav-link[href="' + currentLocation + '"]').addClass('active');
+		});
+	</script>
 </body>
 
 </html>

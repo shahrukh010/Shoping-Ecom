@@ -4,3 +4,40 @@
 .settings/
 # Ignore compiled Java files
 bin/
+
+# IntelliJ IDEA
+.idea/
+
+# Compiled files
+*.class
+*.war
+*.ear
+*.jar
+
+# Logs and databases
+*.log
+*.sqlite
+*.sqlite3
+*.h2.db
+*.h2.db.*
+hs_err_pid*
+
+# User-specific files
+*.iml
+*.iws
+*.ipr
+.idea/
+out/
+
+# Dependency directories
+lib/
+target/
+bin/
+classes/
+
+# Gradle specific
+.gradle/
+build/
+
+# Other
+.DS_Store
