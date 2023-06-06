@@ -1,2 +1,4 @@
-# shoppers
-shoppers website that allows people to buy and sell digital products over the internet Through an e-commerce website, a business can process orders, accept payments, manage shipping and logistics, and provide customer service.
+# Shoppers
+Shoppers is an e-commerce website that provides a platform for buying and selling digital products over the internet. It offers a seamless experience for users to browse, purchase, and manage their digital products.
+
+## Features
