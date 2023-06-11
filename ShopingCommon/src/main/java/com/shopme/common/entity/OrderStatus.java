@@ -2,5 +2,5 @@ package com.shopme.common.entity;
 
 public enum OrderStatus {
 
-	NEW,PROCESSING
+	NEW, PROCESSING, DELIVERD
 }
