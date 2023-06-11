@@ -51,10 +51,14 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests().antMatchers("/users/**", "/categories/**", "/brands/", "/products/")
-				.hasAnyAuthority("Admin", "Coder").anyRequest().authenticated().and().formLogin().loginPage("/login")
-				.usernameParameter("email").permitAll().and().logout().permitAll().and().rememberMe()
-				.key("d44ee0ba-b0ff-40c7-833a-4541b7e33290").tokenValiditySeconds(2 * 24 * 60 * 60);// 😇/ by default 1
-																									// weak
+				.hasAnyAuthority("Admin", "Coder").antMatchers("/customers/**", "/orders/**")
+				.hasAnyAuthority("Admin", "CEO", "Coder", "SalesPerson").anyRequest().authenticated().and().formLogin()
+				.loginPage("/login").usernameParameter("email").permitAll().and().logout().permitAll().and()
+				.rememberMe().key("d44ee0ba-b0ff-40c7-833a-4541b7e33290").tokenValiditySeconds(2 * 24 * 60 * 60);// 😇/
+																													// by
+																													// default
+																													// 1
+																													// weak
 //																									// maintain remember
 
 		// token

@@ -16,8 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Cascade;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "orders")
@@ -107,7 +106,7 @@ public class Order {
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
 
-	@OneToMany(mappedBy = "order",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private Set<OrderDetail> orderDetails = new HashSet<>();
 
 	public Order() {
@@ -287,6 +286,16 @@ public class Order {
 
 	public void setOrderDetails(Set<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
+	}
+
+	@Transient
+	public String getDestination() {
+
+		String destination = city + ", ";
+		if (state != null && !state.isEmpty())
+			destination += state;
+		destination += country;
+		return destination;
 	}
 
 }
