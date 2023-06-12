@@ -88,8 +88,8 @@ public class AddressRepositoryTest {
 	@Test
 	public void setDefaultAddress() {
 
-		Integer id = 3;
-		repo.setDefaultAddress(id, 3);
+		Integer id = 1;
+		repo.setDefaultAddress(id, 1);
 	}
 
 	@Test
@@ -97,5 +97,14 @@ public class AddressRepositoryTest {
 
 		Integer id = 2;
 		repo.setNonDefaultForOther(id, id);
+	}
+
+	@Test
+	public void testDefaultAddressByCustomerId() {
+
+		Integer id = 6;
+
+		Address address = repo.findDefaultByCustomerId(id);
+		System.out.println(address);
 	}
 }

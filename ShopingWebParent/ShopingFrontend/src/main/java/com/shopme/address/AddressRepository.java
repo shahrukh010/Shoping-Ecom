@@ -27,4 +27,11 @@ public interface AddressRepository extends CrudRepository<Address, Integer> {
 	@Query("UPDATE Address a SET a.defaultForShipping=false WHERE a.id !=?1 AND a.customer.id = ?2")
 	@Modifying
 	public void setNonDefaultForOther(Integer defaultAddressId, Integer customerId);
+
+	/*
+	 * After writing each query better to write junit test ensure that our query or
+	 * code is working fine or not
+	 */
+	@Query("SELECT a FROM Address a WHERE a.customer.id = ?1 AND a.defaultForShipping = true")
+	public Address findDefaultByCustomerId(Integer id);
 }
