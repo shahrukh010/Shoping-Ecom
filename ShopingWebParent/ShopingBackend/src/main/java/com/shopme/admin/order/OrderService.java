@@ -41,6 +41,7 @@ public class OrderService {
 		} else {
 
 			page = orderRepository.findAll(pageable);
+			page.forEach(obj->System.out.println(obj.getCustomer().getFirstName()+":"+obj.getProductCost()));
 		}
 		helper.updateModelAttributes(pageNum, page);
 	}

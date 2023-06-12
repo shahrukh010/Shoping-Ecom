@@ -21,7 +21,7 @@ public class SettingService {
 
 	public EmailSettingBag getEmailSettings() {
 		List<Setting> settings = settingRepo.findByCategory(SettingCategory.MAIL_SERVER);
-		settings.addAll(settingRepo.findByCategory(SettingCategory.MAIL_TEMPLATE));
+		settings.addAll(settingRepo.findByCategory(SettingCategory.MAIL_TEMPLATES));
 
 		return new EmailSettingBag(settings);
 	}
