@@ -298,4 +298,15 @@ public class Order {
 		return destination;
 	}
 
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber="
+				+ phoneNumber + ", address1=" + address1 + ", address2=" + address2 + ", city=" + city + ", state="
+				+ state + ", country=" + country + ", pincode=" + pincode + ", orderTime=" + orderTime
+				+ ", shipingCost=" + shipingCost + ", productCost=" + productCost + ", subtotal=" + subtotal + ", tax="
+				+ tax + ", total=" + total + ", deliveryDays=" + deliveryDays + ", deliveryDate=" + deliveryDate
+				+ ", paymentMethod=" + paymentMethod + ", orderStatus=" + orderStatus + ", customer=" + customer
+				+ ", orderDetails=" + orderDetails + "]";
+	}
+
 }

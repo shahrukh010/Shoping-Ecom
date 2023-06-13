@@ -17,7 +17,7 @@ public class OrderService {
 	@Autowired
 	private OrderRepository orderRepository;
 
-	public void listByPage(int pageNum, PagingAndSortingHelper helper) {
+	public Page listByPage(int pageNum, PagingAndSortingHelper helper) {
 
 		String sortedField = helper.getSortField();
 		String sortDir = helper.getSortDir();
@@ -44,5 +44,6 @@ public class OrderService {
 			page.forEach(obj->System.out.println(obj.getCustomer().getFirstName()+":"+obj.getProductCost()));
 		}
 		helper.updateModelAttributes(pageNum, page);
+		return page;
 	}
 }

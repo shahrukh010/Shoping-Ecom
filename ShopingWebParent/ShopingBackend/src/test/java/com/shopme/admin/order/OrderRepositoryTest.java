@@ -32,7 +32,7 @@ public class OrderRepositoryTest {
 	@Test
 	public void testNewOrder() {
 
-		Customer customer = testEntityManager.find(Customer.class, 1);
+		Customer customer = testEntityManager.find(Customer.class, 6);
 		Product product = testEntityManager.find(Product.class, 16);
 
 		Order mainOrder = new Order();

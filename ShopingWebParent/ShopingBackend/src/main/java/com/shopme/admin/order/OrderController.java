@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.shopme.admin.paginig.PagingAndSortingHelper;
 import com.shopme.admin.paginig.PagingAndSortingParam;
 import com.shopme.admin.setting.SettingService;
+import com.shopme.common.entity.Order;
 import com.shopme.common.entity.Setting;
 
 @Controller
@@ -36,7 +38,10 @@ public class OrderController {
 			@PagingAndSortingParam(listName = "listOrders", moduleURL = "/orders") PagingAndSortingHelper helper,
 			@PathVariable(name = "pageNum") int pageNum, HttpServletRequest request) {
 
-		orderService.listByPage(pageNum, helper);
+		Page orders = orderService.listByPage(pageNum, helper);
+		//debug
+		List<Order> order = orders.getContent();
+		System.out.print(order);
 		loadCurrencySetting(request);
 		return "orders/orders";
 	}
