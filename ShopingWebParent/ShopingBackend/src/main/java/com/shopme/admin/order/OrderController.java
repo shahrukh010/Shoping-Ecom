@@ -10,12 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shopme.admin.paginig.PagingAndSortingHelper;
 import com.shopme.admin.paginig.PagingAndSortingParam;
 import com.shopme.admin.setting.SettingService;
-import com.shopme.common.entity.Order;
+import com.shopme.common.entity.Country;
 import com.shopme.common.entity.Setting;
+import com.shopme.common.entity.order.Order;
 
 @Controller
 public class OrderController {
@@ -44,6 +46,23 @@ public class OrderController {
 		System.out.print(order);
 		loadCurrencySetting(request);
 		return "orders/orders";
+	}
+
+	@GetMapping("/orders/edit/{id}")
+	public String editOrder(@PathVariable(name = "id") Integer id, Model model, RedirectAttributes rediect,
+			HttpServletRequest request) {
+
+		try {
+			Order order = orderService.get(id);
+			List<Country> listCountries = orderService.listCountries();
+			model.addAttribute("pageTitle", "Edit Order(ID:" + id + ")");
+			model.addAttribute("order", order);
+			model.addAttribute("listCountries", listCountries);
+			return "orders/order_form";
+		} catch (OrderNotFoundException ex) {
+			rediect.addFlashAttribute("message", ex.getMessage());
+			return defaultRedirectURL;
+		}
 	}
 
 	@GetMapping("/orders/delete/{id}")

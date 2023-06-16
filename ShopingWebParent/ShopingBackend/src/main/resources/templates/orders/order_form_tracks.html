@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:fragment="content" th:remove="tag">				
 	<div id="trackList">
-		<th:block th:each="track, status : ${order.orderTracks}">
+		<th:block th:each="track, status : ${}">
 			<div class="row border rounded p-1" th:id="'rowTrack' + ${status.count}" 
 					th:with="isTrackWithStatusNew = ${track.status.toString() == 'NEW'}">
 				
@@ -68,4 +68,4 @@
 	</div>
 	
 	<button id="linkAddTrack" class="btn btn-success mt-3">Add Track Record</button>
-</div>
+</div>-->

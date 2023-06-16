@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.shopme.admin.paginig.SearchRepository;
-import com.shopme.common.entity.Order;
+import com.shopme.common.entity.order.Order;
 
 @Repository
 public interface OrderRepository extends SearchRepository<Order, Integer> {

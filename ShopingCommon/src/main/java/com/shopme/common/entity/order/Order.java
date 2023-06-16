@@ -1,4 +1,4 @@
-package com.shopme.common.entity;
+package com.shopme.common.entity.order;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import com.shopme.common.entity.Customer;
 
 @Entity
 @Table(name = "orders")
@@ -61,7 +63,16 @@ public class Order {
 	private String pincode;
 
 	private Date orderTime;
-	private float shipingCost;
+	public float shippingCost;
+
+	public float getShippingCost() {
+		return shippingCost;
+	}
+
+	public void setShippingCost(float shippingCost) {
+		this.shippingCost = shippingCost;
+	}
+
 	private float productCost;
 	private float subtotal;
 	private float tax;
@@ -87,8 +98,17 @@ public class Order {
 	 */
 	@Enumerated(EnumType.STRING)
 	private PaymentMethod paymentMethod;
+
 	@Enumerated(EnumType.STRING)
 	public OrderStatus status;
+
+	public OrderStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(OrderStatus status) {
+		this.status = status;
+	}
 
 	/*
 	 * @ManyToOne: This annotation indicates that the relationship between the Order
@@ -200,14 +220,6 @@ public class Order {
 		this.orderTime = orderTime;
 	}
 
-	public float getShipingCost() {
-		return shipingCost;
-	}
-
-	public void setShipingCost(float shipingCost) {
-		this.shipingCost = shipingCost;
-	}
-
 	public float getProductCost() {
 		return productCost;
 	}
@@ -303,7 +315,7 @@ public class Order {
 		return "Order [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber="
 				+ phoneNumber + ", address1=" + address1 + ", address2=" + address2 + ", city=" + city + ", state="
 				+ state + ", country=" + country + ", pincode=" + pincode + ", orderTime=" + orderTime
-				+ ", shipingCost=" + shipingCost + ", productCost=" + productCost + ", subtotal=" + subtotal + ", tax="
+				+ ", shipingCost=" + shippingCost + ", productCost=" + productCost + ", subtotal=" + subtotal + ", tax="
 				+ tax + ", total=" + total + ", deliveryDays=" + deliveryDays + ", deliveryDate=" + deliveryDate
 				+ ", paymentMethod=" + paymentMethod + ", orderStatus=" + status + ", customer=" + customer
 				+ ", orderDetails=" + orderDetails + "]";

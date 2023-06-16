@@ -13,11 +13,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
 import com.shopme.common.entity.Customer;
-import com.shopme.common.entity.Order;
-import com.shopme.common.entity.OrderDetail;
-import com.shopme.common.entity.OrderStatus;
-import com.shopme.common.entity.PaymentMethod;
 import com.shopme.common.entity.Product;
+import com.shopme.common.entity.order.Order;
+import com.shopme.common.entity.order.OrderDetail;
+import com.shopme.common.entity.order.OrderStatus;
+import com.shopme.common.entity.order.PaymentMethod;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -45,7 +45,7 @@ public class OrderRepositoryTest {
 		mainOrder.setCountry(customer.getCountry().getName());
 		mainOrder.setState(customer.getState());
 		mainOrder.setPincode(customer.getPostalCode().toString());
-		mainOrder.setShipingCost(10);
+		mainOrder.setShippingCost(10);
 		mainOrder.setProductCost(product.getCost());
 		mainOrder.setTax(0);
 		mainOrder.setSubtotal(product.getPrice());
@@ -110,7 +110,7 @@ public class OrderRepositoryTest {
 		mainOrder.getOrderDetails().add(orderDetails);
 		mainOrder.getOrderDetails().add(orderDetails1);
 
-		mainOrder.setShipingCost(30);
+		mainOrder.setShippingCost(30);
 		mainOrder.setProductCost(product.getCost() + product2.getCost());
 		mainOrder.setTax(0);
 		float subtotal = product.getPrice() + product2.getPrice() * 3;
