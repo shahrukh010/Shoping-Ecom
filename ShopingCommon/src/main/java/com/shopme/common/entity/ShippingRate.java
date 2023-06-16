@@ -1,7 +1,5 @@
 package com.shopme.common.entity;
 
-import java.util.Objects;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,11 +21,11 @@ public class ShippingRate {
 
 	private int days;
 
-	@Column(name = "code_supported")
-	private boolean codeSupported;
+	@Column(name = "cod_supported")
+	public boolean codSupported;
 
 	@ManyToOne
-	@JoinColumn(name = "country_id")//join  country_id column in shipping_rate table with ManyToOne relationship
+	@JoinColumn(name = "country_id") // join country_id column in shipping_rate table with ManyToOne relationship
 	private Country country;
 
 	@Column(nullable = false)
@@ -58,11 +56,11 @@ public class ShippingRate {
 	}
 
 	public boolean isCodeSupported() {
-		return codeSupported;
+		return codSupported;
 	}
 
-	public void setCodeSupported(boolean codeSupported) {
-		this.codeSupported = codeSupported;
+	public void setCodeSupported(boolean codSupported) {
+		this.codSupported = codSupported;
 	}
 
 	public Country getCountry() {
@@ -83,25 +81,33 @@ public class ShippingRate {
 
 	@Override
 	public String toString() {
-		return "ShipingRate [id=" + id + ", rate=" + rate + ", days=" + days + ", codeSupported=" + codeSupported
+		return "ShipingRate [id=" + id + ", rate=" + rate + ", days=" + days + ", codSupported=" + codSupported
 				+ ", country=" + country + ", state=" + state + "]";
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ShippingRate other = (ShippingRate) obj;
-		return Objects.equals(id, other.id);
-	}
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + ((id == null) ? 0 : id.hashCode());
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		ShippingRate other = (ShippingRate) obj;
+//		if (id == null) {
+//			if (other.id != null)
+//				return false;
+//		} else if (!id.equals(other.id))
+//			return false;
+//		return true;
+//	}
 
 }

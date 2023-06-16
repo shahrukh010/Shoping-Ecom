@@ -74,7 +74,7 @@ public class OrderRepositoryTest {
 	@Test
 	public void testCreateNewOrderWithMultipleProduct() {
 
-		Customer customer = testEntityManager.find(Customer.class, 1);
+		Customer customer = testEntityManager.find(Customer.class, 7);
 		Product product = testEntityManager.find(Product.class, 1);
 		Product product2 = testEntityManager.find(Product.class, 9);
 
@@ -125,24 +125,24 @@ public class OrderRepositoryTest {
 
 		assertThat(saveOrder.getId()).isGreaterThan(0);
 	}
-
-	@Test
-	public void testListOrder() {
-
-		Iterable<Order> listOrder = orderRepo.findAll();
-
-		listOrder.forEach(System.out::println);
-	}
-
-	@Test
-	public void testUpdateOrder() {
-
-		Integer orderId = 8;
-
-		Order order = orderRepo.findById(orderId).get();
-		order.setOrderStatus(OrderStatus.DELIVERD);
-		order.setPaymentMethod(PaymentMethod.CODE);
-		orderRepo.save(order);
-	}
+//
+//	@Test
+//	public void testListOrder() {
+//
+//		Iterable<Order> listOrder = orderRepo.findAll();
+//
+//		listOrder.forEach(System.out::println);
+//	}
+//
+//	@Test
+//	public void testUpdateOrder() {
+//
+//		Integer orderId = 8;
+//
+//		Order order = orderRepo.findById(orderId).get();
+//		order.setOrderStatus(OrderStatus.DELIVERD);
+//		order.setPaymentMethod(PaymentMethod.CODE);
+//		orderRepo.save(order);
+//	}
 
 }

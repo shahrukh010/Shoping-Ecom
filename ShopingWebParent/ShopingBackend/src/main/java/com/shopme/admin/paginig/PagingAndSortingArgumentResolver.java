@@ -1,7 +1,6 @@
 package com.shopme.admin.paginig;
 
 import org.springframework.core.MethodParameter;
-import org.springframework.lang.Nullable;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -11,14 +10,12 @@ public class PagingAndSortingArgumentResolver implements HandlerMethodArgumentRe
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
-
 		return parameter.getParameterAnnotation(PagingAndSortingParam.class) != null;
 	}
 
 	@Override
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer model, NativeWebRequest request,
 			WebDataBinderFactory binderFactory) throws Exception {
-
 		PagingAndSortingParam annotation = parameter.getParameterAnnotation(PagingAndSortingParam.class);
 		String sortDir = request.getParameter("sortDir");
 		String sortField = request.getParameter("sortField");
@@ -33,4 +30,5 @@ public class PagingAndSortingArgumentResolver implements HandlerMethodArgumentRe
 
 		return new PagingAndSortingHelper(model, annotation.listName(), sortField, sortDir, keyword);
 	}
+
 }

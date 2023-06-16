@@ -46,4 +46,14 @@ public class OrderService {
 		helper.updateModelAttributes(pageNum, page);
 		return page;
 	}
+	
+	
+	public void deleteOrder(Integer id)throws OrderNotFoundException {
+		
+		Long count = orderRepository.count();
+		if(count == null || count == 0)
+			throw new OrderNotFoundException("Could not find any order");
+			
+		orderRepository.deleteById(id);
+	}
 }

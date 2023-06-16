@@ -88,7 +88,7 @@ public class Order {
 	@Enumerated(EnumType.STRING)
 	private PaymentMethod paymentMethod;
 	@Enumerated(EnumType.STRING)
-	private OrderStatus orderStatus;
+	public OrderStatus status;
 
 	/*
 	 * @ManyToOne: This annotation indicates that the relationship between the Order
@@ -265,11 +265,11 @@ public class Order {
 	}
 
 	public OrderStatus getOrderStatus() {
-		return orderStatus;
+		return status;
 	}
 
 	public void setOrderStatus(OrderStatus orderStatus) {
-		this.orderStatus = orderStatus;
+		this.status = orderStatus;
 	}
 
 	public Customer getCustomer() {
@@ -305,7 +305,7 @@ public class Order {
 				+ state + ", country=" + country + ", pincode=" + pincode + ", orderTime=" + orderTime
 				+ ", shipingCost=" + shipingCost + ", productCost=" + productCost + ", subtotal=" + subtotal + ", tax="
 				+ tax + ", total=" + total + ", deliveryDays=" + deliveryDays + ", deliveryDate=" + deliveryDate
-				+ ", paymentMethod=" + paymentMethod + ", orderStatus=" + orderStatus + ", customer=" + customer
+				+ ", paymentMethod=" + paymentMethod + ", orderStatus=" + status + ", customer=" + customer
 				+ ", orderDetails=" + orderDetails + "]";
 	}
 

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -20,7 +21,6 @@ import com.shopme.common.entity.Setting;
 public class OrderController {
 
 	private String defaultRedirectURL = "redirect:/orders/page/1?sortField=orderTime&sortDir=desc";
-
 
 	@Autowired
 	private OrderService orderService;
@@ -39,11 +39,23 @@ public class OrderController {
 			@PathVariable(name = "pageNum") int pageNum, HttpServletRequest request) {
 
 		Page orders = orderService.listByPage(pageNum, helper);
-		//debug
+		// debug
 		List<Order> order = orders.getContent();
 		System.out.print(order);
 		loadCurrencySetting(request);
 		return "orders/orders";
+	}
+
+	@GetMapping("/orders/delete/{id}")
+	public String orderDelete(@PathVariable(name = "id") Integer id, Model redirectAttributes) {
+
+		try {
+			orderService.deleteOrder(id);
+		} catch (OrderNotFoundException ex) {
+			redirectAttributes.addAttribute("message", ex.getMessage());
+		}
+		return defaultRedirectURL;
+
 	}
 
 	private void loadCurrencySetting(HttpServletRequest request) {
@@ -51,7 +63,6 @@ public class OrderController {
 		List<Setting> currencySetting = settingService.getCurrencySetting();
 
 		for (Setting setting : currencySetting) {
-
 			request.setAttribute(setting.getKey(), setting.getValue());
 		}
 	}
