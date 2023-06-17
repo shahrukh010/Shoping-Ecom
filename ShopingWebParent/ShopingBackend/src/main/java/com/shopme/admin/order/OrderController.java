@@ -65,6 +65,22 @@ public class OrderController {
 		}
 	}
 
+	@GetMapping("/orders/view/{id}")
+	public String viewOrderDetails(@PathVariable(name = "id") Integer id, Model model, RedirectAttributes redirect,
+			HttpServletRequest request) {
+
+		try {
+			Order order = orderService.get(id);
+			loadCurrencySetting(request);
+			model.addAttribute("order", order);
+			return "orders/order_details_modal";
+
+		} catch (OrderNotFoundException ex) {
+			redirect.addFlashAttribute("message", ex.getMessage());
+			return defaultRedirectURL;
+		}
+	}
+
 	@GetMapping("/orders/delete/{id}")
 	public String orderDelete(@PathVariable(name = "id") Integer id, Model redirectAttributes) {
 

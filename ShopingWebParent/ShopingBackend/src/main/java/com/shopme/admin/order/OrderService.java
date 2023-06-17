@@ -2,6 +2,7 @@ package com.shopme.admin.order;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -59,7 +60,9 @@ public class OrderService {
 
 		try {
 
-			return orderRepository.findById(id).get();
+			Order order = orderRepository.findById(id).get();
+			System.out.println(order.getCustomer());
+			return order;
 		} catch (NoSuchElementException ex) {
 			throw new OrderNotFoundException("Count not find any order with id:" + id);
 		}
