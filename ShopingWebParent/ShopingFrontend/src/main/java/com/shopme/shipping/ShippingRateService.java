@@ -13,8 +13,11 @@ public class ShippingRateService {
 	@Autowired
 	private ShippingRateRepository shippingRate;
 
-	// shopping cart allowed to delivered on this customer country and state or not
-	// using customer object
+	// shopping cart allowed to delivered on this customer based country and state
+	// or not
+	// checking product shipping is eligible or not
+	// suppose if customer type some other state or country which are not available
+	// in shipping_rate db then user will be No Shipping Available for this location
 	public ShippingRate getShippingRateForCustomer(Customer customer) {
 
 		String state = customer.getState();
@@ -26,6 +29,9 @@ public class ShippingRateService {
 
 	// shopping cart allowed to delivered on this Adress country and state or not
 	// using address object
+	// checking product shipping is eligible or not
+	// suppose if customer type some other state or country which are not available
+	// in shipping_rate db then user will be No Shipping Available for this location
 	public ShippingRate getShippingRateForAddress(Address address) {
 
 		String state = address.getState();
