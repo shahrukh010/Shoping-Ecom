@@ -12,9 +12,14 @@ Shopme is an e-commerce website that provides a platform for buying and selling 
 * Order Management: Place orders, select shipping methods, and provide billing information.
 
 
+# Shopme
+
+Shopme is a web application for buying and selling products online.
+
 ## Frameworks and Libraries Used
 
 - Backend:
+  - Java 🚀
   - Spring Boot 🌐
   - Hibernate ORM 🔄
   - Spring Security 🔒
@@ -30,7 +35,7 @@ Shopme is an e-commerce website that provides a platform for buying and selling 
   - MySQL 🗄️
 
 - Authentication:
- - Database Authentication 🔐
+  - Database Authentication 🔐
   - Google OAuth 🌐
   - Facebook Authentication 👥
 
@@ -48,5 +53,6 @@ To run the application locally, follow these steps:
 2. Configure the database connection in the `application.properties` file.
 3. Install the required dependencies.
 4. Build and run the application.
-5. Access the application in your web browser at `http://localhost:8080/Shopme`.
+5. Access the application in your web browser at `http://localhost:8080`.
+
 
