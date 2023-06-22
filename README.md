@@ -57,6 +57,4 @@ To run the application locally, follow these steps:
 
 ## Screenshots
 
-![Homepage](screenshots/Home2.png)
-
-
+![Homepage](screenshots/bread.png)
