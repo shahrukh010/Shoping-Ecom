@@ -58,7 +58,5 @@ To run the application locally, follow these steps:
 ## Screenshots
 
 ![Homepage](screenshots/Home2.png)
-![Product Listing](screenshots/product-listing.png)
-![Cart](screenshots/cart.png)
 
 
