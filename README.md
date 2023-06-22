@@ -58,3 +58,5 @@ To run the application locally, follow these steps:
 ## Screenshots
 
 ![Homepage](screenshots/bread.png)
+![Alt text](https://github.com/shahrukh010/shopme-application/blob/master/screenshots/bread.png)
+
