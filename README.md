@@ -55,4 +55,10 @@ To run the application locally, follow these steps:
 4. Build and run the application.
 5. Access the application in your web browser at `http://localhost:8080`.
 
+## Screenshots
+
+![Homepage](screenshots/home.png)
+![Product Listing](screenshots/product-listing.png)
+![Cart](screenshots/cart.png)
+
 
