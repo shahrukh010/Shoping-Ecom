@@ -56,5 +56,6 @@ To run the application locally, follow these steps:
 5. Access the application in your web browser at `http://localhost:8080`.
 
 ## Screenshots
+Admin Login
 ![admin-login](https://github.com/shahrukh010/shopme-application/assets/93510831/641be601-4bad-494b-9006-39dd1e6455ef)
 
