@@ -59,10 +59,10 @@ To run the application locally, follow these steps:
 
 ### Frontend Module
 
+![Registration](https://github.com/shahrukh010/shopme-application/assets/93510831/49040a5c-dfd2-480c-b0be-280c4701016c)
 ![Login](https://github.com/shahrukh010/shopme-application/assets/93510831/259a4dc8-77eb-435c-a357-2237d14fcf1a)
 ![Home2](https://github.com/shahrukh010/shopme-application/assets/93510831/aeea21b1-1487-4e51-a0bd-c91260c2cdfd)
 ![cart](https://github.com/shahrukh010/shopme-application/assets/93510831/a152fca4-8a5a-4033-98cf-32057f7255e4)
-![Registration](https://github.com/shahrukh010/shopme-application/assets/93510831/49040a5c-dfd2-480c-b0be-280c4701016c)
 
 ### Backend Module (Admin)
 
