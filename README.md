@@ -10,3 +10,9 @@ Shopme is an e-commerce website that provides a platform for buying and selling 
 * Product Catalog: Browse a wide range of products with detailed information, including images, descriptions, prices, and ratings.
 * Shopping Cart: Add products to the cart, view their contents, and manage quantities.
 * Order Management: Place orders, select shipping methods, and provide billing information.
+
+## Frameworks and Libraries Used
+- Backend:
+  - Spring Boot 🌐
+  - Hibernate ORM 🔄
+  - Spring Security 🔒
