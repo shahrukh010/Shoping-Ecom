@@ -59,6 +59,7 @@ public class CheckoutController {
 
 		model.addAttribute("checkoutInfo", checkout);
 		model.addAttribute("cartItems", cartItem);
+		model.addAttribute("customer",customer);
 
 		return "checkout/checkout";
 	}

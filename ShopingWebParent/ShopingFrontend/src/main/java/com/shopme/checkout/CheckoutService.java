@@ -25,6 +25,7 @@ public class CheckoutService {
 		checkout.setDeliverDays(rate.getDays());
 		checkout.setCodSupported(rate.isCodeSupported());
 		checkout.setShippingCostTotal(shippingCostTotal);
+		checkout.setPaymentTotal(productTotal + shippingCostTotal);
 
 		return checkout;
 	}

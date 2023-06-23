@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('Shopping Cart', 'none')" />
+<head th:replace="fragments :: page_head('Shopping Cart', 'none')"></head>
 <body>
 <div class="container-fluid">
 	<div th:replace="navigation :: header_menu"></div>
@@ -26,7 +26,6 @@
 						<b>Expected deliver date: </b>[[${#dates.format(checkoutInfo.deliverDate, 'E, dd MMM yyyy')}]]
 					</p>
 				</div>
-				
 			</div>		
 			
 			<div class="card mt-3 mb-3">
@@ -34,12 +33,11 @@
 				<div class="card-body">
 					<div th:if="${checkoutInfo.codSupported}">
 						<form th:action="@{/place_order}" method="post">
-						<p>
-						
-							<input type="radio" name="paymentMethod" id="radioCOD" value="COD" /> Cash on Delivery (COD)
-							&nbsp;
-							<button class="btn btn-primary d-none" type="submit" id="buttonSubmit">Place Order with COD</button>
-						</p>
+							<p>
+								<input type="radio" name="paymentMethod" id="radioCOD" value="COD" /> Cash on Delivery (COD)
+								&nbsp;
+								<button class="btn btn-primary d-none" type="submit" id="buttonSubmit">Place Order with COD</button>
+							</p>
 						</form>
 					</div>
 					
@@ -57,24 +55,24 @@
 				<div class="card-header"><h5>Order Summary</h5></div>
 				<div class="card-body">
 					<div>
-					<table>
-						<th:block th:each="item : ${cartItems}">
-						<tr th:with="product = ${item.product}">
-							<td>[[${item.quantity}]] X &nbsp;&nbsp;</td>
-							<td width="70%">
-								<a th:href="@{'/p/' + ${product.alias}}" target="_blank">
-									[[${product.shortName}]]
-								</a>
-								<br/>
-								<small>Ship: <div th:replace="fragments :: format_currency(${item.shippingCost})"></div></small>
-							</td>
-							<td>
-								<div th:replace="fragments :: format_currency(${item.subtotal})">
-							</td>
-						</tr>
-						</th:block>
-						<tr><td colspan="3"><hr/></tr>
-					</table>
+						<table>
+							<th:block th:each="item : ${cartItems}">
+								<tr th:with="product = ${item.product}">
+									<td>[[${item.quantity}]] X &nbsp;&nbsp;</td>
+									<td width="70%">
+										<a th:href="@{'/p/' + ${product.alias}}" target="_blank">
+											[[${product.name}]]
+										</a>
+										<br/>
+										<small>Ship: <div th:replace="fragments :: format_currency(${item.shippingCost})"></div></small>
+									</td>
+									<td>
+										<div th:replace="fragments :: format_currency(${item.subtotal})"></div>
+									</td>
+								</tr>
+							</th:block>
+							<tr><td colspan="3"><hr/></tr>
+						</table>
 					</div>
 					
 					<div class="row mt-2">
@@ -122,14 +120,12 @@
 		createOrder: function(data, actions) {
 			// setup a transaction
 			return actions.order.create({
-				
 				intent: 'CAPTURE', // make payment immediately
 				payer: {
 					name: {
-					given_name: "[[${customer.firstName}]]",
-					surname: "[[${customer.lastName}]]"
+						given_name: "[[${customer.firstName}]]",
+						surname: "[[${customer.lastName}]]"
 					},
-				
 					address: {
 						address_line_1: "[[${customer.addressLine1}]]",
 						address_line_2: "[[${customer.addressLine2}]]",
@@ -138,9 +134,7 @@
 						postal_code: "[[${customer.postalCode}]]",
 						country_code: "[[${customer.country.code}]]"
 					},
-					
 					email_address: "[[${customer.email}]]",
-					
 					phone: {
 						phone_type: "MOBILE",
 						phone_number: {
@@ -148,20 +142,17 @@
 						}
 					}
 				},
-				
 				purchase_units: [{
 					amount: {
-						value: "[[${checkoutInfo.paymentTotal4PayPal}]]",
+						value: "[[${checkoutInfo.paymentTotal}]]",
 						currency_code: "[[${currencyCode}]]"
 					}
 				}],
-				
 				application_context: {
 					shipping_preference: "NO_SHIPPING"
 				}
 			});
 		},
-		
 		onApprove: function(data, actions) {
 			// buyer approved payment
 			return actions.order.capture().then(function(details) {
@@ -170,12 +161,10 @@
 				validateOrder(orderId);				
 			});
 		},
-		
 		onCancel: function(data) {
 			// buyer cancelled payment
 			alert('Payment cancelled by the buyer');
 		},
-		
 		onError: function(err) {
 			// error that prevents buyer from doing checkout
 			showErrorModal("Something wrong with your address information, so payment will not work.");
@@ -184,4 +173,4 @@
 	
 </script>
 </body>
-</html>	
+</html>
