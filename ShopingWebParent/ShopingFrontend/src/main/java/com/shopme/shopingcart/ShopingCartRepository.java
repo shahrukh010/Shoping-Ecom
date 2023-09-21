@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.shopme.common.entity.CartItem;
 import com.shopme.common.entity.Customer;
@@ -35,7 +33,7 @@ public interface ShopingCartRepository extends CrudRepository<CartItem, Integer>
 	 */
 	@Modifying
 	/*
-	 * @Transactional//better to use in service layer (for avoiding write multiple
+	 * @Transactional//better to use in" service layer (for avoiding write multiple
 	 * times on each delete/update this annotation because of it is class level or
 	 * method level also to avoid TransactionException
 	 */
@@ -45,4 +43,8 @@ public interface ShopingCartRepository extends CrudRepository<CartItem, Integer>
 	@Modifying
 	@Query("DELETE FROM CartItem c WHERE c.customer.id = ?1 AND c.product.id = ?2")
 	public void deleteByCustomerAndProduct(Integer customerId, Integer productId);
+	
+	@Modifying
+	@Query("DELETE Cartitem c WHERE c.customer.id = ?1")
+	public void deleteByCustomer(Integer customerId);
 }

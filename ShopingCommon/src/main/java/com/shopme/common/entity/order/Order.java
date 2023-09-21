@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.shopme.common.entity.Address;
 import com.shopme.common.entity.Customer;
 
 @Entity
@@ -298,6 +299,32 @@ public class Order {
 
 	public void setOrderDetails(Set<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
+	}
+
+	public void copyAddressFromCustomer() {
+
+		setFirstName(customer.getFirstName());
+		setLastName(customer.getLastName());
+		setPhoneNumber(customer.getPhoneNumber().toString());
+		setAddress1(customer.getAddressLine1());
+		setAddress2(customer.getAddressLine2());
+		setCity(customer.getCity());
+		setCountry(customer.getCountry().getName());
+		setPincode(customer.getPostalCode().toString());
+		setState(customer.getState());
+	}
+
+	public void copyShippingAddress(Address address) {
+
+		setFirstName(address.getFirstName());
+		setLastName(address.getLastName());
+		setPhoneNumber(address.getPhoneNumber().toString());
+		setAddress1(address.getAddress1());
+		setAddress2(address.getAddress2());
+		setCity(address.getCity());
+		setCountry(address.getCountry().getName());
+		setPincode(address.getZipCode().toString());
+		setState(address.getState());
 	}
 
 	@Transient

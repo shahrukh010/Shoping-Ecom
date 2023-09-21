@@ -16,6 +16,10 @@ import com.shopme.admin.exception.CustomerNotFoundException;
 import com.shopme.common.entity.Country;
 import com.shopme.common.entity.Customer;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+
 @Controller
 public class CustomerController {
 
@@ -23,12 +27,18 @@ public class CustomerController {
 	private CustomerService customerService;
 
 	@GetMapping("/customers")
+	@ApiOperation(value = "List customers on the first page", notes = "Returns a paginated list of customers on the first page.", response = String.class)
 	public String listByFirstPage(Model model) {
 
 		return listByPage(model, 1, "firstName", "asc", null);
 	}
 
 	@GetMapping("/customers/page/{pageNum}")
+	@ApiOperation(value = "List customers by page", notes = "Returns a paginated list of customers by page number.", response = String.class)
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "sortField", value = "Field to sort by", dataType = "string", paramType = "query"),
+			@ApiImplicitParam(name = "sortDir", value = "Sorting direction (asc or desc)", dataType = "string", paramType = "query"),
+			@ApiImplicitParam(name = "keyword", value = "Search keyword", dataType = "string", paramType = "query") })
 	public String listByPage(Model model, @PathVariable(name = "pageNum") Integer pageNum,
 			@Param("sortField") String sortField, @Param("sortDir") String sortDir, @Param("keyword") String keyword) {
 

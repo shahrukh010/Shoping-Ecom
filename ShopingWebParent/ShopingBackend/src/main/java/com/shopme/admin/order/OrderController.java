@@ -1,6 +1,9 @@
 package com.shopme.admin.order;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,6 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.core.exc.StreamWriteException;
+import com.fasterxml.jackson.databind.DatabindException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shopme.admin.paginig.PagingAndSortingHelper;
 import com.shopme.admin.paginig.PagingAndSortingParam;
 import com.shopme.admin.setting.SettingService;
@@ -38,12 +45,34 @@ public class OrderController {
 	@GetMapping("/orders/page/{pageNum}")
 	public String listByPage(
 			@PagingAndSortingParam(listName = "listOrders", moduleURL = "/orders") PagingAndSortingHelper helper,
-			@PathVariable(name = "pageNum") int pageNum, HttpServletRequest request) {
+			@PathVariable(name = "pageNum") int pageNum, HttpServletRequest request)
+			throws StreamWriteException, DatabindException, IOException {
 
 		Page orders = orderService.listByPage(pageNum, helper);
 		// debug
 		List<Order> order = orders.getContent();
-		System.out.print(order);
+
+		ObjectMapper mapper = new ObjectMapper();
+
+//		List<OrderResponse> responses = new ArrayList<>();
+
+//		for (Order odr : order) {
+//			OrderResponse response = new OrderResponse();
+//			response.setId(odr.getId());
+//			response.setFirstName(odr.getFirstName());
+//			response.setLastName(odr.getLastName());
+//			response.setAddress1(odr.getAddress1());
+//			response.setAddress2(odr.getAddress2());
+//			response.setCity(odr.getCity());
+//			response.setPhoneNumber(odr.getPhoneNumber());
+//			response.setState(odr.getState());
+//			responses.add(response);
+//		}
+		JsonNode jsonNode = mapper.valueToTree(order.stream().map(OrderResponse::new).collect(Collectors.toList()));
+//		System.out.println(jsonNode);
+
+//		mapper.writeValue(new File("target/order.json"), responses);
+//		System.out.print(order);
 		loadCurrencySetting(request);
 		return "orders/orders";
 	}
