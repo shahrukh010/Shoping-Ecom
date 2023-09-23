@@ -25,7 +25,7 @@ public class ShippingRateRepositoryTest {
 		Country india = new Country(106);
 		ShippingRate newRate = new ShippingRate();
 		newRate.setCountry(india);
-		newRate.setState("Hyderabad");
+		newRate.setState("New Delhi");
 		newRate.setRate(8.25f);
 		newRate.setDays(6);
 		newRate.setCodeSupported(true);

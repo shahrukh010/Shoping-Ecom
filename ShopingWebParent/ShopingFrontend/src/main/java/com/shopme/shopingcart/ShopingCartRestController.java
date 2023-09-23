@@ -47,19 +47,19 @@ public class ShopingCartRestController {
 
 	}
 
-	@DeleteMapping("/cart/remove/{productId}")
-	public String removeProduct(@PathVariable(name = "productId") Integer productId, HttpServletRequest request) {
-
-		try {
-
-			Customer customer = getAuthenticatedCustomer(request);
-			cartService.removeProduct(productId, customer);
-			return "The product has been removed from shoping cart";
-		} catch (CustomerNotFoundException ex) {
-
-			return "You must login to remove product";
-		}
-	}
+//	@DeleteMapping("/cart/remove/{productId}")
+//	public String removeProduct(@PathVariable(name = "productId") Integer productId, HttpServletRequest request) {
+//
+//		try {
+//
+//			Customer customer = getAuthenticatedCustomer(request);
+//			cartService.removeProduct(productId, customer);
+//			return "The product has been removed from shoping cart";
+//		} catch (CustomerNotFoundException ex) {
+//
+//			return "You must login to remove product";
+//		}
+//	}
 
 	private Customer getAuthenticatedCustomer(HttpServletRequest request) throws CustomerNotFoundException {
 

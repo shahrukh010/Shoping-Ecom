@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,12 +69,14 @@ public class OrderController {
 //		}
 		JsonNode jsonNode = mapper.valueToTree(order.stream().map(OrderResponse::new).collect(Collectors.toList()));
 //		System.out.println(jsonNode);
+		System.out.println(jsonNode.toPrettyString());
 
 //		mapper.writeValue(new File("target/order.json"), responses);
 //		System.out.print(order);
 		loadCurrencySetting(request);
 		return "orders/orders";
 	}
+
 
 	@GetMapping("/orders/edit/{id}")
 	public String editOrder(@PathVariable(name = "id") Integer id, Model model, RedirectAttributes rediect,
@@ -130,4 +131,10 @@ public class OrderController {
 			request.setAttribute(setting.getKey(), setting.getValue());
 		}
 	}
+
+	public String jar() {
+
+		return "I'm jar file";
+	}
+
 }

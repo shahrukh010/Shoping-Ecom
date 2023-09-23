@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.shopme.Utility;
 import com.shopme.address.AddressService;
@@ -36,6 +37,8 @@ public class CheckoutController {
 
 	@GetMapping("/checkout")
 	public String showCheckoutPage(Model model, HttpServletRequest request) throws CustomerNotFoundException {
+		
+		System.out.println("checkout");
 
 		Customer customer = getAuthenticatedCustomer(request);
 		List<CartItem> cartItems = shoppingCartService.listCartItems(customer);
@@ -59,7 +62,7 @@ public class CheckoutController {
 
 		model.addAttribute("checkoutInfo", checkout);
 		model.addAttribute("cartItems", cartItem);
-		model.addAttribute("customer",customer);
+		model.addAttribute("customer", customer);
 
 		return "checkout/checkout";
 	}
@@ -72,6 +75,12 @@ public class CheckoutController {
 			throw new CustomerNotFoundException("Customer Email Not Found");
 
 		return customerService.getCustomerByEmail(CUSTOMER_EMAIL);
+	}
+
+	@PostMapping("/place_order")
+	public String placeOrder(HttpServletRequest request) {
+
+		return "checkout/order_completed";
 	}
 
 }

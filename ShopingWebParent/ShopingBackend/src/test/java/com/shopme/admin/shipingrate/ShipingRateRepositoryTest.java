@@ -31,9 +31,9 @@ public class ShipingRateRepositoryTest {
 		Country india = new Country(106);
 		ShippingRate newRate = new ShippingRate();
 		newRate.setCountry(india);
-		newRate.setState("Maharashtra");
-		newRate.setRate(8.25f);
-		newRate.setDays(3);
+		newRate.setState("Haryana");
+		newRate.setRate(6.25f);
+		newRate.setDays(4);
 		newRate.setCodeSupported(true);
 
 		ShippingRate savedRate = repo.save(newRate);

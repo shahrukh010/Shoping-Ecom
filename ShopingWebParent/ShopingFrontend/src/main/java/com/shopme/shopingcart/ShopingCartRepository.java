@@ -45,6 +45,6 @@ public interface ShopingCartRepository extends CrudRepository<CartItem, Integer>
 	public void deleteByCustomerAndProduct(Integer customerId, Integer productId);
 	
 	@Modifying
-	@Query("DELETE Cartitem c WHERE c.customer.id = ?1")
+	@Query("DELETE CartItem c WHERE c.customer.id = ?1")
 	public void deleteByCustomer(Integer customerId);
 }

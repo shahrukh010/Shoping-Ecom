@@ -31,8 +31,6 @@ public class OrderResponse {
 		this.state = order.getState();
 	}
 
-	public OrderResponse() {
-	}
 
 	public Integer getId() {
 		return id;
