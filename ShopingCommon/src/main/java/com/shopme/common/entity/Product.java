@@ -3,6 +3,7 @@ package com.shopme.common.entity;
 import java.beans.Transient;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -19,7 +20,10 @@ import javax.persistence.Table;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.files.FileMetadata;
 import com.dropbox.core.v2.files.GetTemporaryLinkResult;
+import com.dropbox.core.v2.files.ListFolderResult;
+import com.dropbox.core.v2.files.Metadata;
 
 @Entity
 @Table(name = "products")
@@ -269,25 +273,74 @@ public class Product {
 		if (id == null || mainImage == null)
 			return "images/default-user.png";
 
-//		return getTemporaryLinkForDropboxFile("product_images/73");
-
 		return "/product-images/" + this.id + "/" + this.mainImage;
-	}
 
-	private String getTemporaryLinkForDropboxFile(String filePath) {
+//		return getTemporaryLinkForDropboxFiles();
+	}
+//****************************************************************************************************	
+//****************************************************************************************************	
+
+	private String getTemporaryLinkForDropboxFiles() {
+		String ACCESS_TOKEN = "sl.Bmo08ATvZ_wcJR7HZrjBSFDHZuuoYSlbj6QVGlgVx2KIvSTufJ4lKNgfUYSh6g_OLx3kiqOBHTsB7URbJ2oEqeP_7Jq7fJgY8Y5_xblW0Aewm1_Hq1q2BvZsZ8dF50r14n3-_z8VHsFNCv_IyEig";
 		try {
-			String ACCESS_TOKEN = "sl.Bmn4-PhrIJrNB4g5o-C9JkB5fcTIWb5OUKUSxHfsUeFrRnn00mXP-sJZyo9k5Zn042M9Es01x40vCkkvnxamHTEus6sTtazmSMAaNH_ssIPgH2sRYEAqzB4qp9qhBSGtB6b7HPAbk9s3z_xICl0x";
 			DbxRequestConfig config = new DbxRequestConfig("dropbox/shoppers");
 			DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
 
-			GetTemporaryLinkResult result = client.files().getTemporaryLink(filePath);
-			return result.getLink();
+			String dropboxFolderPath = "/product-images/";
+			String link = "";
 
-		} catch (DbxException ex) {
-			ex.printStackTrace();
-			return null;
+			// because of when link return to getImagePath() then after again loop is start
+			// from 1
+			Random random = new Random();
+			int randomIndex = random.nextInt(166) + 1; // Generate a random index between 1 and 166
+
+			String path = dropboxFolderPath + randomIndex + "/";
+			String filePath = listImages(client, path);
+
+			if (filePath != null) {
+				System.out.println(filePath);
+				GetTemporaryLinkResult result = client.files().getTemporaryLink(filePath);
+
+				link = result.getLink().toString();
+				if (!link.isEmpty()) {
+					return link;
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+
+		return "images/default-user.png";
 	}
+
+	private String listImages(DbxClientV2 client, String dropboxFolderPath) throws DbxException {
+		ListFolderResult result = client.files().listFolder(dropboxFolderPath);
+
+		while (true) {
+			for (Metadata metadata : result.getEntries()) {
+				if (metadata instanceof FileMetadata && isImageFile(metadata.getName().toLowerCase())) {
+					System.out.println("Image: " + metadata.getPathLower());
+					return metadata.getPathLower();
+				}
+			}
+
+			if (!result.getHasMore()) {
+				break;
+			}
+
+			result = client.files().listFolderContinue(result.getCursor());
+		}
+		return null;
+	}
+
+	private static boolean isImageFile(String fileName) {
+		return fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".png")
+				|| fileName.endsWith(".gif");
+	}
+
+//****************************************************************************************************	
+//****************************************************************************************************	
 
 	public String getMainImage() {
 //		return "/images/default-user.png";
