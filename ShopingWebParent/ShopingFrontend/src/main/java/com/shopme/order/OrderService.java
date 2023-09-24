@@ -33,6 +33,7 @@ public class OrderService {
 		newOrder.setProductCost(checkoutInfo.getProductCost());
 		newOrder.setSubtotal(checkoutInfo.getProductTotal());
 		newOrder.setShippingCost(checkoutInfo.getShippingCostTotal());
+		newOrder.setPaymentMethod(paymentMethod);
 		newOrder.setTax(0.0f);
 		newOrder.setTotal(checkoutInfo.getPaymentTotal());
 		newOrder.setDeliveryDays(checkoutInfo.getDeliverDays());

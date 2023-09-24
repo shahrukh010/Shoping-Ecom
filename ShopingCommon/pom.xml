@@ -24,6 +24,18 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.dropbox.core</groupId>
+			<artifactId>dropbox-core-sdk</artifactId>
+			<version>5.4.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.dropbox.core</groupId>
+			<artifactId>sdk</artifactId>
+			<version>1.6-beta-1</version>
+		</dependency>
+
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>

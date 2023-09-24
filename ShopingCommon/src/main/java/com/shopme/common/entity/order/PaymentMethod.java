@@ -2,5 +2,5 @@ package com.shopme.common.entity.order;
 
 public enum PaymentMethod {
 
-	CODE, CREDIT_CARD
+	COD, CREDIT_CARD
 }

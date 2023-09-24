@@ -61,6 +61,11 @@ public class ShopingCartService {
 		return subtotal;
 	}
 
+	public void deleteByCustomer(Customer customer) {
+
+		cartRepo.deleteByCustomer(customer.getId());
+	}
+
 //	public void removeProduct(Integer productId, Customer customer) {
 //
 //		cartRepo.deleteByCustomerAndProduct(customer.getId(), productId);

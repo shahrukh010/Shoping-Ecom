@@ -117,7 +117,7 @@ public class OrderRepositoryTest {
 		mainOrder.setSubtotal(subtotal);
 		mainOrder.setTotal(subtotal + 30);
 
-		mainOrder.setPaymentMethod(PaymentMethod.CODE);
+		mainOrder.setPaymentMethod(PaymentMethod.COD);
 		mainOrder.setOrderStatus(OrderStatus.PROCESSING);
 		mainOrder.setDeliveryDate(new Date());
 		mainOrder.setDeliveryDays(10);

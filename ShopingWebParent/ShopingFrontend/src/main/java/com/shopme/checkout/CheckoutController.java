@@ -16,8 +16,10 @@ import com.shopme.common.entity.Address;
 import com.shopme.common.entity.CartItem;
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.ShippingRate;
+import com.shopme.common.entity.order.PaymentMethod;
 import com.shopme.customer.CustomerNotFoundException;
 import com.shopme.customer.CustomerService;
+import com.shopme.order.OrderService;
 import com.shopme.shipping.ShippingRateService;
 import com.shopme.shopingcart.ShopingCartService;
 
@@ -35,9 +37,12 @@ public class CheckoutController {
 	@Autowired
 	private ShopingCartService shoppingCartService;
 
+	@Autowired
+	private OrderService orderService;
+
 	@GetMapping("/checkout")
 	public String showCheckoutPage(Model model, HttpServletRequest request) throws CustomerNotFoundException {
-		
+
 		System.out.println("checkout");
 
 		Customer customer = getAuthenticatedCustomer(request);
@@ -78,8 +83,30 @@ public class CheckoutController {
 	}
 
 	@PostMapping("/place_order")
-	public String placeOrder(HttpServletRequest request) {
+	public String placeOrder(HttpServletRequest request) throws CustomerNotFoundException {
 
+		String paymentTyep = request.getParameter("paymentMethod");
+		PaymentMethod paymentMethod = PaymentMethod.valueOf(paymentTyep);
+
+		Customer customer = getAuthenticatedCustomer(request);
+
+		List<CartItem> cartItems = shoppingCartService.listCartItems(customer);
+		Address defaultAddress = addressService.getDefaultAddress(customer);
+
+		ShippingRate shippingRate = null;
+
+		if (defaultAddress != null) {
+			shippingRate = shippingRates.getShippingRateForAddress(defaultAddress);
+		} else {
+
+			shippingRate = shippingRates.getShippingRateForCustomer(customer);
+		}
+
+		List<CartItem> cartItem = shoppingCartService.listCartItems(customer);
+		CheckoutInfo checkout = checkoutService.prepareCheckout(cartItem, shippingRate);
+
+		orderService.createOrder(customer, defaultAddress, cartItems, paymentMethod, checkout);
+		shoppingCartService.deleteByCustomer(customer);
 		return "checkout/order_completed";
 	}
 

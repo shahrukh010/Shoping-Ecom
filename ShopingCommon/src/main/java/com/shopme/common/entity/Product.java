@@ -16,6 +16,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.dropbox.core.DbxException;
+import com.dropbox.core.DbxRequestConfig;
+import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.files.GetTemporaryLinkResult;
+
 @Entity
 @Table(name = "products")
 public class Product {
@@ -45,7 +50,7 @@ public class Product {
 	private float cost;
 	private float price;
 
-	@Column(name="discount_percent")
+	@Column(name = "discount_percent")
 	private float discountPercent;
 
 	private float length;
@@ -59,8 +64,8 @@ public class Product {
 	private int reviewCount;
 	private float averageRating;
 
-	
-	public Product() {}
+	public Product() {
+	}
 
 	public Product(Integer id) {
 		this.id = id;
@@ -82,11 +87,11 @@ public class Product {
 		this.averageRating = averageRating;
 	}
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "categories_id")
 	private Categories categories;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "brand_id")
 	private Brand brand;
 
@@ -193,8 +198,7 @@ public class Product {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-	
-	
+
 	public float getDiscountPercent() {
 		return discountPercent;
 	}
@@ -211,7 +215,6 @@ public class Product {
 		return this.price;
 
 	}
-
 
 	public float getLength() {
 		return length;
@@ -266,7 +269,24 @@ public class Product {
 		if (id == null || mainImage == null)
 			return "images/default-user.png";
 
+//		return getTemporaryLinkForDropboxFile("product_images/73");
+
 		return "/product-images/" + this.id + "/" + this.mainImage;
+	}
+
+	private String getTemporaryLinkForDropboxFile(String filePath) {
+		try {
+			String ACCESS_TOKEN = "sl.Bmn4-PhrIJrNB4g5o-C9JkB5fcTIWb5OUKUSxHfsUeFrRnn00mXP-sJZyo9k5Zn042M9Es01x40vCkkvnxamHTEus6sTtazmSMAaNH_ssIPgH2sRYEAqzB4qp9qhBSGtB6b7HPAbk9s3z_xICl0x";
+			DbxRequestConfig config = new DbxRequestConfig("dropbox/shoppers");
+			DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
+
+			GetTemporaryLinkResult result = client.files().getTemporaryLink(filePath);
+			return result.getLink();
+
+		} catch (DbxException ex) {
+			ex.printStackTrace();
+			return null;
+		}
 	}
 
 	public String getMainImage() {
@@ -301,14 +321,12 @@ public class Product {
 
 		this.details.add(new ProductDetail(name, value, this));
 	}
-	
+
 	@Override
 	public String toString() {
-		
-		return "product name:"+this.name+"product price"+this.getPrice();
-				
+
+		return "product name:" + this.name + "product price" + this.getPrice();
+
 	}
-	
-	
 
 }
