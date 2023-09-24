@@ -327,6 +327,44 @@ public class Order {
 		setState(address.getState());
 	}
 
+	public String getShippingAddress() {
+
+		String address = firstName;
+
+		if (lastName != null && !lastName.isBlank()) {
+			address += " " + lastName;
+		}
+
+		if (address1 != null && !address1.isEmpty()) {
+			address += "," + address1;
+		}
+
+		if (address2 != null && !address2.isEmpty()) {
+			address += "," + address2;
+		}
+
+		if (city != null && !city.isEmpty()) {
+			address += "," + city;
+		}
+
+		if (state != null && !state.isEmpty()) {
+			address += "," + getState();
+		}
+
+		address += "," + this.country;
+
+		if (pincode != null) {
+			address += ", pincode " + getPincode();
+		}
+
+		if (phoneNumber != null) {
+			address += ", phone " + getPhoneNumber();
+		}
+
+		return address;
+
+	}
+
 	@Transient
 	public String getDestination() {
 
